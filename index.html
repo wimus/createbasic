@@ -9,7 +9,7 @@
 	<body>
 		<div class="container">
 			<h1>Basic Site Files generator</h1>
-			<form id="AI" action="getData" method="get" enctype="multipart/form-data">
+			<form id="AI" action="" method="POST" enctype="multipart/form-data">
 				<h2>Algemene instellingen</h2>
 
 				<fieldset class="form-group">
@@ -23,11 +23,17 @@
 				    <small class="text-muted">Vermijd vreemde tekens en spaties.</small>
 				</fieldset>
 
-				<!-- <fieldset class="form-group">
+				<fieldset class="form-group">
 				    <label for="AIlogo">Logo</label>
-				    <input type="file" class="form-control-file" name="AIlogo" id="AIlogo">
+				    <input type="file" class="form-control-file" required="true" name="AIlogo" id="AIlogo">
 				    <small class="text-muted">je bestandsnaam MOET 'logo.png' zijn!!</small>
-				</fieldset> -->
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AIfavicon">Favicon</label>
+				    <input type="file" class="form-control-file" required="true" name="AIfavicon" id="AIfavicon">
+				    <small class="text-muted">je bestandsnaam MOET 'favicon.png' zijn!!</small>
+				</fieldset>
 
 				<h2>Contactgegevens</h2>
 

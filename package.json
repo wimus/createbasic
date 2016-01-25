@@ -10,8 +10,9 @@
   "author": "Wim Smits",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.1.2",
+    "express": "^4.13.4",
     "formidable": "^1.0.17",
-    "fs-extra": "^0.26.4",
-    "colors": "^1.1.2"
+    "fs-extra": "^0.26.4"
   }
 }
