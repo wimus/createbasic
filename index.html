@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+		<script src="https://mjolnic.com/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://mjolnic.com/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<h1>Basic Site Files generator</h1>
+			<form id="AI" action="getData" method="get" enctype="multipart/form-data">
+				<h2>Algemene instellingen</h2>
+
+				<fieldset class="form-group">
+					<label for="AInaam">Website titel</label>
+					<input type="text" class="form-control" required="true" name="AInaam" id="AInaam" placeholder="Website titel">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AIfolder">Folder</label>
+				    <input type="text" class="form-control" required="true" name="AIfolder" id="AIfolder" placeholder="Folder">
+				    <small class="text-muted">Vermijd vreemde tekens en spaties.</small>
+				</fieldset>
+
+				<!-- <fieldset class="form-group">
+				    <label for="AIfavicon">Favicon</label>
+				    <input type="file" class="form-control-file" name="AIfavicon" id="AIfavicon">
+				    <small class="text-muted">Aanbevolen: png, squared 200x200px, max. 50kb.</small>
+				</fieldset> -->
+
+				<h2>Contactgegevens</h2>
+
+				<fieldset class="form-group">
+				    <label for="AIadres">Adres</label>
+				    <input type="text" class="form-control" id="AIadres" name="AIadres" placeholder="Straat + huisnummer">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AIgemeente">Gemeente</label>
+				    <input type="text" class="form-control" id="AIgemeente" name="AIgemeente" placeholder="Postcode + gemeente">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AIland">Land</label>
+				    <input type="text" class="form-control" id="AIland" name="AIland" placeholder="Land">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AIemail">E-mail</label>
+				    <input type="text" class="form-control" id="AIemail" name="AIemail" placeholder="E-mail">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AItelefoon">Telefoon</label>
+				    <input type="text" class="form-control" id="AItelefoon" name="AItelefoon" placeholder="Telefoon">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AIgsm">Gsm</label>
+				    <input type="text" class="form-control" id="AIgsm" name="AIgsm" placeholder="Gsm">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AIfax">Fax</label>
+				    <input type="text" class="form-control" id="AIfax" name="AIfax" placeholder="Fax">
+				</fieldset>
+
+				<h2>Social media</h2>
+
+				<fieldset class="form-group">
+				    <label for="AIfacebook">Facebook</label>
+				    <input type="text" class="form-control" id="AIfacebook" name="AIfacebook" placeholder="Facebook url">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AItwitter">Twitter</label>
+				    <input type="text" class="form-control" id="AItwitter" name="AItwitter" placeholder="Twitter url">
+				</fieldset>
+
+				<fieldset class="form-group">
+				    <label for="AIyoutube">Youtube</label>
+				    <input type="text" class="form-control" id="AIyoutube" name="AIyoutube" placeholder="Youtube url">
+				</fieldset>
+
+				<h2>Opmaak vars</h2>
+
+				<h3>Hoofdkleuren</h3>
+				<div class="row">
+					<fieldset class="form-group col-md-4">
+					    <label for="brandprimary">Brand-primary</label>
+				        <div class="input-group colorpicker-component">
+				            <input id="brandprimary" name="brandprimary" type="text" value="#000000" class="form-control"/>
+				            <span class="input-group-addon"><i></i></span>
+				        </div>
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="brandsecondary">Brand-secondary</label>
+				        <div class="input-group colorpicker-component">
+				            <input id="brandsecondary" name="brandsecondary" type="text" value="#000000" class="form-control"/>
+				            <span class="input-group-addon"><i></i></span>
+				        </div>
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="brandtertiary">Brand-tertiary</label>
+				        <div class="input-group colorpicker-component">
+				            <input id="brandtertiary" name="brandtertiary" type="text" value="#000000" class="form-control"/>
+				            <span class="input-group-addon"><i></i></span>
+				        </div>
+					</fieldset>
+				</div>
+
+				<h3>Tekst</h3>
+				<fieldset class="form-group">
+				    <label for="googlefontsurl">Google font url</label>
+				    <input type="text" class="form-control" id="googlefontsurl" name="googlefontsurl" placeholder="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+				</fieldset>
+
+				<div class="row">
+					<fieldset class="form-group col-md-4">
+					    <label for="fontfamilysansserif">Font-family body</label>
+					    <input type="text" class="form-control" id="fontfamilysansserif" name="fontfamilysansserif" placeholder="'Open Sans', sans-serif">
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="fontfamilytitles">Font-family titels</label>
+					    <input type="text" class="form-control" id="fontfamilytitles" name="fontfamilytitles" placeholder="'Open Sans', sans-serif">
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="fontsizebase">Font-size-base</label>
+					    <input type="text" class="form-control" id="fontsizebase" name="fontsizebase" placeholder="20px">
+					</fieldset>
+				</div>
+
+				<div class="row">
+					<fieldset class="form-group col-md-4">
+					    <label for="textcolor">Text-color</label>
+				        <div class="input-group colorpicker-component">
+				            <input id="textcolor" name="textcolor" type="text" value="#000000" class="form-control"/>
+				            <span class="input-group-addon"><i></i></span>
+				        </div>
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="bodyfontweight">Body-font-weight</label>
+					    <select class="form-control" id="bodyfontweight" name="bodyfontweight">
+						    <option>100</option>
+						    <option>200</option>
+						    <option>300</option>
+						    <option selected="selected">400</option>
+						    <option>500</option>
+						    <option>600</option>
+						    <option>700</option>
+						    <option>800</option>
+						    <option>900</option>
+					  	</select>
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="bodyfontweightstrong">Body-font-weight-strong</label>
+					    <select class="form-control" id="bodyfontweightstrong" name="bodyfontweightstrong">
+						    <option>100</option>
+						    <option>200</option>
+						    <option>300</option>
+						    <option>400</option>
+						    <option>500</option>
+						    <option>600</option>
+						    <option selected="selected">700</option>
+						    <option>800</option>
+						    <option>900</option>
+					  	</select>
+					</fieldset>
+				</div>
+
+				<h3>Header</h3>
+				<div class="row">
+					<fieldset class="form-group col-md-4">
+					    <label for="headerheight">Header-height</label>
+					    <input type="text" class="form-control" id="headerheight" name="headerheight" placeholder="400px">
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="headerheightmobile">Header-height-mobile</label>
+					    <input type="text" class="form-control" id="headerheightmobile" name="headerheightmobile" placeholder="100vh">
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="logocentered">Logo position</label>
+					    <select class="form-control" id="logocentered" name="logocentered">
+						    <option selected="selected" value="0">Links</option>
+						    <option value="1">Gecentreerd</option>
+					  	</select>
+					</fieldset>
+				</div>
+
+				<h3>Activeren componenten</h3>
+				<div class="row">
+					<fieldset class="form-group col-md-4">
+					    <label for="slideshow">Slideshow</label>
+					    <select class="form-control" id="slideshow" name="slideshow">
+						    <option selected="selected" value="1">Actief</option>
+						    <option value="0">Niet actief</option>
+					  	</select>
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="culturesactive">Cultures</label>
+					    <select class="form-control" id="culturesactive" name="culturesactive">
+						    <option selected="selected" value="1">Actief</option>
+						    <option value="0">Niet actief</option>
+					  	</select>
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="parallaxactive">Block-parallax</label>
+					    <select class="form-control" id="parallaxactive" name="parallaxactive">
+						    <option selected="selected" value="1">Actief</option>
+						    <option value="0">Niet actief</option>
+					  	</select>
+					</fieldset>
+				</div>
+
+				<div class="row">
+					<fieldset class="form-group col-md-4">
+					    <label for="blocksplitactive">Block-split</label>
+					    <select class="form-control" id="blocksplitactive" name="blocksplitactive">
+						    <option selected="selected" value="1">Actief</option>
+						    <option value="0">Niet actief</option>
+					  	</select>
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="boxshadows">Box-shadows</label>
+					    <select class="form-control" id="boxshadows" name="boxshadows">
+						    <option value="1">Actief</option>
+						    <option selected="selected" value="0">Niet actief</option>
+					  	</select>
+					</fieldset>
+
+					<fieldset class="form-group col-md-4">
+					    <label for="borderradiusbase">Border-radius-base</label>
+					    <input type="text" class="form-control" id="borderradiusbase" name="borderradiusbase" placeholder="0px">
+					</fieldset>
+				</div>
+
+			  	<button type="submit" class="btn btn-primary">Aanmaken</button>
+
+			</form>
+
+		</div>
+
+		<script>
+		    $(function(){
+		        $('.colorpicker-component').colorpicker({});
+		    });
+		</script>
+	</body>
+</html>

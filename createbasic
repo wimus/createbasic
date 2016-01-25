@@ -1,0 +1,170 @@
+#! /usr/bin/env node
+
+var http = require('http'),
+    util = require('util'),
+    fs = require('fs-extra'),
+    url = require('url'),
+    qs = require('querystring'),
+    colors = require('colors');
+
+
+var server = http.createServer(function (req,res){
+    var url_parts = url.parse(req.url,true);
+    var body = '';
+
+    if(req.method === 'POST'){
+
+    } else {
+	    req.on('data',function(data){ res.end(' data event: '+data);
+	});
+
+    if(url_parts.pathname == '/')
+    	fs.readFile('./index.html',function(error,data){
+    		res.end(data);
+    	});
+
+    else if(url_parts.pathname == '/getData'){
+        getData(res,url_parts);
+    }
+}
+
+});
+server.listen(8080);
+console.log('Surf naar http://localhost:8080 in je browser...'.grey);
+
+
+
+function getData(res,fields){
+ 	console.log("Projectnaam: " +fields.query.AInaam);
+
+    //create project folder
+    var dir = 'projects/' + fields.query.AIfolder;
+	if (!fs.existsSync(dir)){
+	    fs.mkdirSync(dir);
+	}
+
+    //create templates folder
+    var templatesDir = 'projects/' + fields.query.AIfolder + '/templates/';
+    if (!fs.existsSync(templatesDir)){
+        fs.mkdirSync(templatesDir);
+    }
+
+    //create src folder
+    var srcDir = 'projects/' + fields.query.AIfolder + '/src/';
+    if (!fs.existsSync(srcDir)){
+        fs.mkdirSync(srcDir);
+    }
+
+    //create assets folder
+    var assetsDir = 'projects/' + fields.query.AIfolder + '/src/assets/';
+    if (!fs.existsSync(assetsDir)){
+        fs.mkdirSync(assetsDir);
+    }
+
+    //create sass folder
+    var sassDir = assetsDir + '/sass';
+    if (!fs.existsSync(sassDir)){
+        fs.mkdirSync(sassDir);
+    }
+
+    //create sass components folder
+    var sassComponentsDir = sassDir + '/components';
+    if (!fs.existsSync(sassComponentsDir)){
+        fs.mkdirSync(sassComponentsDir);
+    }
+
+    //create src js folder
+    var jsDir = assetsDir + '/js';
+    if (!fs.existsSync(jsDir)){
+        fs.mkdirSync(jsDir);
+    }
+
+    //create release folder
+    var releaseDir = 'projects/' + fields.query.AIfolder + '/release/';
+    if (!fs.existsSync(releaseDir)){
+        fs.mkdirSync(releaseDir);
+    }
+
+    //create bower_components folder
+    var bowerComponentsDir = srcDir + '/bower_components/';
+    if (!fs.existsSync(bowerComponentsDir)){
+        fs.mkdirSync(bowerComponentsDir);
+    }
+
+
+	var htmlTemplate = "<!DOCTYPE html>\n <html>\n <head>\n <title>" + fields.query.AInaam + "</title>\n <meta content='Over' property='og:title' />\n <meta charset='utf-8' />\n \n <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n <meta name='viewport' content='width=device-width, initial-scale=1'>\n \n <link href='" + fields.query.googlefontsurl + "' rel='stylesheet' type='text/css'>\n \n <link href='http://www.dezigncrew.com/assets/shared/css/layout-basic.min.css' rel='stylesheet' />\n <link id='theme' href='/release/css/styles.min.css' rel='stylesheet' />\n \n <link href='http://www.dezigncrew.com/assets/shared/css/jquery.fancybox-2.1.5.min.css' rel='stylesheet' />\n \n <link rel='icon' type='image/png' href='/release/img/icons/favicon.png' />\n </head>\n \n<body class=''>\n <!-- Navigation -->\n <nav class='navbar navbar-fixed-top' role='navigation'>\n <div class='container'>\n <div class='navbar-header'>\n <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#nav'>\n <span class='sr-only'>Toggle navigation</span>\n <span class='icon-bar'></span>\n <span class='icon-bar'></span>\n <span class='icon-bar'></span>\n </button>\n <a class='navbar-brand' href='#'>" + fields.query.AInaam + "</a>\n </div>\n <div class='collapse navbar-collapse' id='nav'>\n <div class='navigation'>\n <ul>\n <li class='selected'>\n <a href='index.html'>Home</a>\n </li>\n <li>\n <a href='page2.html'>item 2</a>\n <ul>\n <li>\n <a href='#'>Extra 01</a>\n </li>\n <li>\n <a href='#'>Extra 02</a>\n </li>\n <li>\n <a href='#'>Extra 03</a>\n </li>\n </ul>\n </li>\n <li>\n <a href='#'>item 3</a>\n </li>\n <li>\n <a href='#'>Contact</a>\n </li>\n </ul>\n </div>\n </div>\n </div>\n </nav>\n \n <header>\n <div class='header-inner'>\n \n <div class='search-container' data-search-term-placeholder='zoeken'>\n <div class='search'>\n <form action='/Wes/Website/nl-BE/Search' class='search-form' method='get'>\n <input name='recordsPerPage' type='hidden' value='10'>\n <input name='sortBy' type='hidden' value='title'>\n <input class='search-term' name='term' type='text' placeholder='zoeken'>\n <input class='search-submit' type='submit' value='Verzenden'>\n </form>\n </div>\n </div>\n \n <a id='logo' href='#'><img class='img-responsive' src='/release/img/logo.png' alt='" + fields.query.AInaam + "' /></a>\n \n <span id='cultureSelector'>\n \n <ul id='cultures-list'>\n <li class='culture nl-BE'>\n <a href='/home' title='Home'>NL</a>\n </li>\n <li class='culture en-GB'>\n <a href='/en-gb-home' title='Home'>ENG</a>\n </li>\n <li class='culture fr-BE'>\n <a href='/fr-be-home' title='Home'>FR</a>\n </li>\n <li class='culture de-DE'>\n <a href='/de-de-home' title='Home'>FR</a>\n </li>\n </ul>\n \n </span>\n \n </div>\n \n <div id='header-mask'></div>\n \n </header>\n \n <div id='content'>\n \n <h1 class='page-title'>" + fields.query.AInaam + "</h1>\n \n <div class='page-blocks'>\n \n <div class='page-block foto-links'>\n <h2 class='page-block-title'>Block titel</h2>\n <div class='page-block-content'>\n <img src='https://placeholdit.imgix.net/~text?txtsize=40&txt=DeZign+Crew&w=500&h=300&txttrack=0' alt='foto titel' />\n Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met <a href='#'>de introductie van Letraset vellen</a> met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.\n </div>\n </div>\n \n <div class='page-block foto-rechts'>\n <h2 class='page-block-title'>Block titel</h2>\n <div class='page-block-content'>\n <img src='https://placeholdit.imgix.net/~text?txtsize=40&txt=DeZign+Crew&w=500&h=300&txttrack=0' alt='foto titel' />\n Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met <a href='#'>de introductie van Letraset vellen</a> met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.\n </div>\n </div>\n \n <div class='page-block breed'>\n <h2 class='page-block-title'>Block titel</h2>\n <div class='page-block-content'>\n Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met <a href='#'>de introductie van Letraset vellen</a> met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.\n </div>\n </div>\n \n <div class='page-block'>\n <h2 class='page-block-title'></h2>\n <div class='page-block-content'>\n <ul class='image-list'>\n \n <li class='image-list-image'>\n <a class='fancybox image-list-image-link image-list-image-fancybox' href='#'>\n <img class='image-list-image-img' src='https://placeholdit.imgix.net/~text?txtsize=20&txt=DeZign+Crew&w=300&h=225&txttrack=0'/>\n <span class='image-list-image-title'>foto titel</span>\n </a>\n </li>\n \n <li class='image-list-image'>\n <a class='fancybox image-list-image-link image-list-image-fancybox' href='#'>\n <img class='image-list-image-img' src='https://placeholdit.imgix.net/~text?txtsize=20&txt=DeZign+Crew&w=300&h=225&txttrack=0'/>\n <span class='image-list-image-title'>foto titel</span>\n </a>\n </li>\n \n <li class='image-list-image'>\n <a class='fancybox image-list-image-link image-list-image-fancybox' href='#'>\n <img class='image-list-image-img' src='https://placeholdit.imgix.net/~text?txtsize=20&txt=DeZign+Crew&w=300&h=225&txttrack=0'/>\n <span class='image-list-image-title'>foto titel</span>\n </a>\n </li>\n \n <li class='image-list-image'>\n <a class='fancybox image-list-image-link image-list-image-fancybox' href='#'>\n <img class='image-list-image-img' src='https://placeholdit.imgix.net/~text?txtsize=20&txt=DeZign+Crew&w=300&h=225&txttrack=0'/>\n <span class='image-list-image-title'>foto titel</span>\n </a>\n </li>\n \n <li class='image-list-image'>\n <a class='fancybox image-list-image-link image-list-image-fancybox' href='#'>\n <img class='image-list-image-img' src='https://placeholdit.imgix.net/~text?txtsize=20&txt=DeZign+Crew&w=300&h=225&txttrack=0'/>\n <span class='image-list-image-title'>foto titel</span>\n </a>\n </li>\n \n <li class='image-list-image'>\n <a class='fancybox image-list-image-link image-list-image-fancybox' href='#'>\n <img class='image-list-image-img' src='https://placeholdit.imgix.net/~text?txtsize=20&txt=DeZign+Crew&w=300&h=225&txttrack=0'/>\n <span class='image-list-image-title'>foto titel</span>\n </a>\n </li>\n \n </ul>\n </div>\n </div>\n \n </div>\n \n </div>\n \n \n <footer>\n <div id='footer-mask'></div>\n <div class='container'>\n <div id='scrollToTop'></div>\n <div class='col-md-4'>\n " + fields.query.AInaam + "<br/>\n " + fields.query.AIadres + "<br/>\n " + fields.query.AIgemeente + "<br/>\n Land\n </div>\n <div class='col-md-4 text-center'>\n <span class='footer-icon email'>" + fields.query.AIemail + "</span>\n <span class='footer-icon telephone'>" + fields.query.AItelefoon + "</span>\n <span class='footer-icon gsm'>" + fields.query.AIgsm + "</span>\n <span class='footer-icon fax'>" + fields.query.AIfax + "</span>\n <a href='" + fields.query.AIfacebook + "' class='footer-icon fb'></a>\n <a href='" + fields.query.AItwitter + "' class='footer-icon twit'></a>\n <a href='" + fields.query.AIyoutube + "' class='footer-icon yt'></a>\n </div>\n <div class='col-md-4 text-right footer-navigation'>\n <div class='navigation'>\n <ul>\n <li>\n <a href='#'>Home</a>\n </li>\n <li>\n <a href='#'>item 2</a>\n </li>\n <li>\n <a href='#'>item 3</a>\n </li>\n <li>\n <a href='#'>Contact</a>\n </li>\n </ul>\n </div>\n </div>\n \n <div class='col-lg-12'>\n <p class='copyright-notice'>&copy; Copyright " + fields.query.AInaam + " 2016 - All Rights Reserved</p>\n <p class='seo-notice'>\n <a href='http://www.dezigncrew.com/'>SEO by DeZignCrew</a>\n |\n <a href='/nl-BE/sitemap'>Sitemap</a>\n |\n <a href='http://www.groenegids.be/'>Advertising by Groenegids</a>\n </p>\n </div>\n </div>\n </footer>\n \n <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>\n <script src='http://www.dezigncrew.com/assets/shared/js/dc_basic.js'></script>\n \n <script src='/release/js/app.min.js'></script>\n \n</body>\n </html>\n";
+
+    var cssVarsTemplate = "//maincolors\n\n$brand-primary:\t\t"+fields.query.brandprimary+"\n$brand-secondary:\t"+fields.query.brandsecondary+"\n$brand-tertiary:\t\t"+fields.query.brandtertiary+"\n$text-color:\t\t"+fields.query.textcolor+"\n\n\n$body-font-weight:\t\t"+fields.query.bodyfontweight+"\n\n$body-font-weight-strong:\t\t"+fields.query.bodyfontweightstrong+"\n\n\n//pagebackground\n$page-background-color:\t\t$brand-tertiary\n$page-background-image:\t\t0\n$page-background-image-options:\t\trepeat-xfixed\n\n//links\n$link-color:\t\t$brand-primary\n$link-hover-color:\t\tlighten($link-color,15%)\n\n//standardpageblock\n$page-block-background-color:\t\trgba($page-background-color,0.8)\n\n//coloredblock\n$brand-featured:\t\t$brand-primary\n$brand-featured-text:\t\t$brand-secondary\n\n//block-split\n$block-split-active:\t\t"+fields.query.blocksplitactive+"\n$block-split-background-color:\t\t$brand-primary\n$block-split-color:\t\t$text-color\n\n//pageblockinheader\n$block-in-header-background-color:\t\t$page-block-background-color\n$block-in-header-color:\t\t$text-color\n\n//parallax\n$parallax-active:\t\t"+fields.query.parallaxactive+"\n\n//generalborder-radius\n$border-radius-base:\t\t"+fields.query.borderradiusbase+"\n\n//font-family&size\n$font-family-sans-serif:\t\t"+fields.query.fontfamilysansserif+",Helvetica,Arial,sans-serif\n$font-family-titles:\t\t"+fields.query.fontfamilytitles+",Helvetica,Arial,sans-serif\n$font-size-base:\t\t"+fields.query.fontsizebase+"\n\n//usedforh1&h2,exceptincoloredblocks($brand-featured-textisusedinthatcase)\n$headings-color:\t\t$brand-primary\n$headings-font-weight:\t\t100\n$page-title-color:\t\t$brand-secondary\n\n//header\n$header-border:\t\t0pxsolid$brand-secondary\n$header-default:\t\t1//nietaltijdwenselijkomeenheaderimagetetonen;bv.alseenpage-background-imagewordtgetoond\n$header-default-image:\t\turl('../img/header-default.jpg')no-repeatcentercenter\n$header-height:\t\t"+fields.query.headerheight+"\n$header-height-mobile:\t\t"+fields.query.headerheightmobile+"\n\n//header-mask\n$header-mask:\t\t0\n$header-mask-image:\t\t'../img/header-mask-schuin.svg'\n\n//logo\n$logo-bg:\t\t0\n$logo-bg-color:\t\trgba($brand-tertiary,0.7)\n$logo-centered:\t\t"+fields.query.logocentered+"\n\n//search\n$search-input-bg:\t\t$brand-secondary\n$search-input-color:\t\t#000\n$search-placeholder-color:\t\t#444\n//searchicon->'../img/icons/search-icon-light.svg'or'../img/icons/search-icon-dark.svg'\n$search-icon:\t\t'../img/icons/search-icon-light.svg'\n$search-icon-hover:\t\t'../img/icons/search-icon-dark.svg'\n\n//navbar\n$navbar-default-bg:\t\t$brand-tertiary\n$navbar-default-border-bottom:\t\t1pxsolid$brand-primary\n//Navbarlinks\n$navbar-default-link-color:\t\t$brand-primary\n$navbar-default-link-bg:\t\t$brand-tertiary\n$navbar-default-link-hover-color:\t\t$brand-secondary\n$navbar-default-link-hover-bg:\t\t$brand-primary\n//Navbartoggle\n$navbar-default-toggle-bg:\t\t$brand-secondary\n$navbar-default-toggle-hover-bg:\t\t$brand-secondary\n$navbar-default-toggle-icon-bar-bg:\t\t$brand-primary\n$navbar-default-toggle-border-color:\t\t$brand-secondary\n\n//footer\n$footer-image:\t\t0\n$footer-image-url:\t\t''\n$footer-default-bg:\t\t$brand-primary\n$footer-text:\t\t$brand-secondary\n$footer-border:\t\t0pxsolid$brand-secondary\n$footer-link-color:\t\t$brand-secondary\n$footer-link-color-hover:\t\t$link-hover-color\n$footer-gsm-icon:\t\t'../img/icons/gsm-icon-light.svg'\n$footer-phone-icon:\t\t'../img/icons/phone-icon-light.svg'\n$footer-email-icon:\t\t'../img/icons/email-icon-light.svg'\n$footer-fax-icon:\t\t'../img/icons/fax-icon-light.svg'\n\n//footer-mask\n$footer-mask:\t\t0\n$footer-mask-image:\t\t'../img/footer-mask-schuin.svg'\n\n//scrolltotop->'../img/icons/scrolltotop-icon-light.svg'or'../img/icons/scrolltotop-icon-dark.svg'\n$scrolltotop:\t\t1\n$scrolltotop-bg:\t\t$brand-primary\n$scrolltotop-bg-hover:\t\t$brand-secondary\n$scrolltotop-icon:\t\t'../img/icons/scrolltotop-icon-light.svg'\n$scrolltotop-icon-hover:\t\t'../img/icons/scrolltotop-icon-dark.svg'\n\n//image-lists->'../img/icons/imagelist-hover-light.svg'or'../img/icons/imagelist-hover-dark.svg'\n$imagelist-border:\t\t2pxsolid$brand-secondary\n$imagelist-hover-bg:\t\trgba($brand-primary,0.5)\n$imagelist-hover-icon:\t\t'../img/icons/imagelist-hover-light.svg'\n$imagelist-title-bg:\t\trgba($brand-tertiary,0.8)\n$imagelist-title:\t\t$brand-primary\n\n//fancybox\n$fancybox-bg:\t\trgba(#000,0.5)\n\n//shadows\n$box-shadows:\t\t"+fields.query.boxshadows+"\n\n//contactform\n$contact-input-border:\t\t1pxsolid$brand-secondary\n$contact-input-bg:\t\tlighten($brand-tertiary,10%)\n$contact-input-color:\t\t$text-color\n$contact-label-color:\t\t$text-color\n$contact-input-border-focus:\t\t1pxsolid$brand-primary\n$contact-input-bg-focus:\t\t$brand-tertiary\n\n//button\n$button-bg:\t\t$brand-primary\n$button-color:\t\t$brand-secondary\n$button-border:\t\t0pxsolid$brand-primary\n$button-bg-hover:\t\t$brand-secondary\n$button-color-hover:\t\t$brand-primary\n$button-border-hover:\t\t0pxsolid$brand-primary\n\n//tables\n$table-row-odd-bg:\t\t$brand-primary\n$table-odd-color:\t\t$text-color\n$table-row-even-bg:\t\t$brand-secondary\n$table-column-odd-bg:\t\trgba($brand-tertiary,0.9)\n$table-column-even-bg:\t\trgba($brand-tertiary,0.85)\n$table-even-color:\t\t$text-color\n$table-row-separator:\t\t1pxsolid$text-color\n$table-column-separator:\t\t1pxsolid$text-color\n\n//slideshow\n$slideshow:\t\t"+fields.query.slideshow+"\n\n//cultureselector\n$cultures-active:\t\t"+fields.query.culturesactive+"\n\n";
+
+	fs.appendFile(dir + '/templates/index.html', htmlTemplate, function (err) {
+		if (err) throw err;
+	  	console.log('[SUCCESS]'.bold.green, ' html template installed.');
+	});
+
+
+    //install _custom-variables.sass
+    fs.appendFile(sassDir + '/_custom-variables.sass', cssVarsTemplate, function (err) {
+        if (err) throw err;
+        console.log('[SUCCESS]'.bold.green, ' _custom-variables.sass installed!');
+    });
+
+    //copy release folder from example project
+    fs.copy('exampleProject/example/release', releaseDir , function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('[SUCCESS]'.bold.green, ' release folder installed!');
+        }
+    });
+
+    //copy sass components folder from example project
+    fs.copy('exampleProject/example/src/assets/sass/components', sassComponentsDir , function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('[SUCCESS]'.bold.green, ' sass_components installed!');
+        }
+    });
+
+    //copy styles.scss from example project
+    fs.copy('exampleProject/example/src/assets/sass/styles.scss', sassDir + '/styles.scss' , function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('[SUCCESS]'.bold.green, ' styles.scss installed!');
+        }
+    });
+
+    //copy js from example project
+    fs.copy('exampleProject/example/src/assets/js', jsDir , function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('[SUCCESS]'.bold.green, ' sass_components installed!');
+        }
+    });
+
+    //copy bower_components folder from example project
+    fs.copy('exampleProject/example/src/bower_components', bowerComponentsDir , function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('[SUCCESS]'.bold.green, ' bower_components installed!');
+        }
+    });
+
+    //copy config.rb from example project
+    fs.copy('exampleProject/example/config.rb', dir + '/config.rb' , function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('[SUCCESS]'.bold.green, ' config.rb installed!');
+        }
+    });
+
+    fs.readFile('./success.html',function(error,data){
+        res.end(data);
+    });
+
+    console.log('[SUCCESS]'.random, ' Project setup OK.');
+}

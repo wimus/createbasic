@@ -1,0 +1,158 @@
+//main colors\n\n
+$brand-primary: \t\t					" + fields.query.brandprimary + "\n
+$brand-secondary: \t				" + fields.query.brandsecondary + "\n
+$brand-tertiary: \t\t					" + fields.query.brandtertiary + "\n
+$text-color:    \t\t     				" + fields.query.textcolor + "\n\n
+
+\n$body-font-weight:\t\t				" + fields.query.bodyfontweight + "\n\n
+$body-font-weight-strong:\t\t			" + fields.query.bodyfontweightstrong + "\n\n
+
+\n//page background\n
+$page-background-color:	\t\t			$brand-tertiary\n
+$page-background-image:	\t\t			0\n
+$page-background-image-options:	\t\t	repeat-x fixed\n
+
+\n//links\n
+$link-color:   \t\t         			$brand-primary\n
+$link-hover-color:   \t\t   			lighten($link-color, 15%)\n
+
+\n//standard page block\n
+$page-block-background-color:\t\t		rgba($page-background-color, 0.8)\n
+
+\n//colored block\n
+$brand-featured: 	\t\t				$brand-primary\n
+$brand-featured-text: 	\t\t			$brand-secondary\n
+
+\n//block-split\n
+$block-split-active:\t\t				" + fields.query.blocksplitactive + "\n
+$block-split-background-color:	\t\t	$brand-primary\n
+$block-split-color:	\t\t				$text-color\n
+
+\n//page block in header\n
+$block-in-header-background-color:\t\t	$page-block-background-color\n
+$block-in-header-color:	\t\t			$text-color\n
+
+\n//parallax\n
+$parallax-active:\t\t					" + fields.query.parallaxactive + "\n
+
+\n//general border-radius\n
+$border-radius-base: \t\t       		" + fields.query.borderradiusbase + "\n
+
+\n//font-family & size\n
+$font-family-sans-serif:  \t\t			" + fields.query.fontfamilysansserif + ", Helvetica, Arial, sans-serif\n
+$font-family-titles:  	\t\t			" + fields.query.fontfamilytitles + ", Helvetica, Arial, sans-serif\n
+$font-size-base: \t\t        			" + fields.query.fontsizebase + "\n
+
+\n//used for h1 & h2, except in colored blocks ($brand-featured-text is used in that case)\n
+$headings-color: \t\t         			$brand-primary\n
+$headings-font-weight:	\t\t			100\n
+$page-title-color: \t\t         		$brand-secondary\n
+
+\n//header\n
+$header-border:	\t\t					0px solid $brand-secondary\n
+$header-default:\t\t					1 //niet altijd wenselijk om een header image te tonen; bv. als een page-background-image wordt getoond\n
+$header-default-image:\t\t				url('../img/header-default.jpg') no-repeat center center\n
+$header-height:	\t\t					" + fields.query.headerheight + "\n
+$header-height-mobile:	\t\t			" + fields.query.headerheightmobile + "\n
+
+\n//header-mask\n
+$header-mask:	\t\t					0\n
+$header-mask-image:	\t\t				'../img/header-mask-schuin.svg'\n
+
+\n//logo\n
+$logo-bg:	\t\t						0\n
+$logo-bg-color:	\t\t					rgba($brand-tertiary, 0.7)\n
+$logo-centered:	\t\t					" + fields.query.logocentered + "\n
+
+\n//search\n
+$search-input-bg: 	\t\t				$brand-secondary\n
+$search-input-color: \t\t				#000\n
+$search-placeholder-color: 	\t\t		#444\n
+//search icon -> '../img/icons/search-icon-light.svg' or '../img/icons/search-icon-dark.svg'\n
+$search-icon: \t\t						'../img/icons/search-icon-light.svg'\n
+$search-icon-hover: \t\t				'../img/icons/search-icon-dark.svg'\n
+
+\n//navbar\n
+$navbar-default-bg: \t\t                $brand-tertiary\n
+$navbar-default-border-bottom: \t\t     1px solid $brand-primary\n
+// Navbar links\n
+$navbar-default-link-color: \t\t        $brand-primary\n
+$navbar-default-link-bg:	\t\t		$brand-tertiary\n
+$navbar-default-link-hover-color: \t\t  $brand-secondary\n
+$navbar-default-link-hover-bg:\t\t      $brand-primary\n
+// Navbar toggle\n
+$navbar-default-toggle-bg: \t\t         $brand-secondary\n
+$navbar-default-toggle-hover-bg: \t\t   $brand-secondary\n
+$navbar-default-toggle-icon-bar-bg:\t\t $brand-primary\n
+$navbar-default-toggle-border-color:\t\t $brand-secondary\n
+
+\n//footer\n
+$footer-image:	\t\t					0\n
+$footer-image-url:	\t\t				''\n
+$footer-default-bg:	\t\t				$brand-primary\n
+$footer-text: 	\t\t					$brand-secondary\n
+$footer-border:	\t\t					0px solid $brand-secondary\n
+$footer-link-color:	\t\t				$brand-secondary\n
+$footer-link-color-hover:	\t\t		$link-hover-color\n
+$footer-gsm-icon:	\t\t				'../img/icons/gsm-icon-light.svg'\n
+$footer-phone-icon:	\t\t				'../img/icons/phone-icon-light.svg'\n
+$footer-email-icon:	\t\t				'../img/icons/email-icon-light.svg'\n
+$footer-fax-icon:\t\t					'../img/icons/fax-icon-light.svg'\n
+
+\n//footer-mask\n
+$footer-mask:	\t\t					0\n
+$footer-mask-image:	\t\t				'../img/footer-mask-schuin.svg'\n
+
+\n//scroll to top -> '../img/icons/scrolltotop-icon-light.svg' or '../img/icons/scrolltotop-icon-dark.svg'\n
+$scrolltotop:	\t\t					1\n
+$scrolltotop-bg: \t\t					$brand-primary\n
+$scrolltotop-bg-hover:	\t\t			$brand-secondary\n
+$scrolltotop-icon:		\t\t			'../img/icons/scrolltotop-icon-light.svg'\n
+$scrolltotop-icon-hover: \t\t			'../img/icons/scrolltotop-icon-dark.svg'\n
+
+\n//image-lists -> '../img/icons/imagelist-hover-light.svg' or '../img/icons/imagelist-hover-dark.svg'\n
+$imagelist-border:	\t\t				2px solid $brand-secondary\n
+$imagelist-hover-bg:	\t\t			rgba($brand-primary, 0.5)\n
+$imagelist-hover-icon:	\t\t			'../img/icons/imagelist-hover-light.svg'\n
+$imagelist-title-bg:\t\t				rgba($brand-tertiary, 0.8)\n
+$imagelist-title:	\t\t				$brand-primary\n
+
+\n//fancybox\n
+$fancybox-bg:	\t\t					rgba(#000, 0.5)\n
+
+\n//shadows\n
+$box-shadows: 	\t\t					" + fields.query.boxshadows + "\n
+
+\n//contact form\n
+$contact-input-border:	\t\t			1px solid $brand-secondary\n
+$contact-input-bg:	\t\t				lighten($brand-tertiary, 10%)\n
+$contact-input-color:	\t\t			$text-color\n
+$contact-label-color:	\t\t			$text-color\n
+$contact-input-border-focus: \t\t		1px solid $brand-primary\n
+$contact-input-bg-focus:	\t\t		$brand-tertiary\n
+
+\n//button\n
+$button-bg:		\t\t					$brand-primary\n
+$button-color:	\t\t					$brand-secondary\n
+$button-border:	\t\t					0px solid $brand-primary\n
+$button-bg-hover:	\t\t				$brand-secondary\n
+$button-color-hover: \t\t				$brand-primary\n
+$button-border-hover:	\t\t			0px solid $brand-primary\n
+
+\n//tables\n
+$table-row-odd-bg:	\t\t				$brand-primary\n
+$table-odd-color:	\t\t				$text-color\n
+$table-row-even-bg:	\t\t				$brand-secondary\n
+$table-column-odd-bg:	\t\t			rgba($brand-tertiary, 0.9)\n
+$table-column-even-bg:	\t\t			rgba($brand-tertiary, 0.85)\n
+$table-even-color:		\t\t			$text-color\n
+$table-row-separator:	\t\t			1px solid $text-color\n
+$table-column-separator:\t\t			1px solid $text-color\n
+
+\n//slideshow\n
+$slideshow:		\t\t					" + fields.query.slideshow + "\n
+
+\n//culture selector\n
+$cultures-active: \t\t					" + fields.query.culturesactive + "\n
+
+\n

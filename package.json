@@ -1,0 +1,17 @@
+{
+  "name": "createbasic",
+  "version": "1.0.0",
+  "description": "Generate a basic website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node createbasic"
+  },
+  "author": "Wim Smits",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "^1.0.17",
+    "fs-extra": "^0.26.4",
+    "colors": "^1.1.2"
+  }
+}
