@@ -12,29 +12,47 @@ var http = require('http'),
     Spinner = require('cli-spinner').Spinner,
     rimraf = require('rimraf');
 
-var server = http.createServer(function (req,res){
-    var url_parts = url.parse(req.url,true);
-    var body = '';
+// var server = http.createServer(function (req,res){
+//     var url_parts = url.parse(req.url,true);
+//     var body = '';
 
-    if(req.method === 'POST'){
-        processFields(req, res);
-    } else {
-	    req.on('data',function(data){ res.end(' data event: '+data);
-	});
+//     if(req.method === 'POST'){
+//         processFields(req, res);
+//     } else {
+// 	    req.on('data',function(data){ res.end(' data event: ' + data);
+// 	});
 
-    if(url_parts.pathname == '/')
-    	fs.readFile('./index.html',function(error,data){
-    		res.end(data);
-    	});
+//     if(url_parts.pathname == '/')
+//     	fs.readFile('./index.html',function(error,data){
+//     		res.end(data);
+//     	});
 
-    else if(url_parts.pathname == '/getData'){
-        //getData(res,url_parts);
-    }
-}
+//     else if(url_parts.pathname == '/getData'){
+//         //getData(res,url_parts);
+//     }
+// }
 
+// });
+
+
+var app = express();
+app.use(express.static('public'));
+
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/index.html');
 });
-server.listen(8080);
-console.log('Surf naar http://localhost:8080 in je browser...'.grey);
+
+app.post('/', function(req, res) {
+    processFields(req, res);
+});
+
+app.listen(8080, function () {
+  console.log('Surf naar http://localhost:8080 in je browser...'.grey);
+});
+
+
+// server.listen(8080);
+// console.log('Surf naar http://localhost:8080 in je browser...'.grey);
 
 
 function processFields(req, res){
@@ -233,9 +251,7 @@ function getData(res,fields, files){
 
             console.log('[SUCCESS]'.random, ' Project setup OK.');
             //return success page after installation
-            fs.readFile('./success.html',function(error,data){
-                res.end(data);
-            });
+            res.sendFile(__dirname + '/success.html');;
         }, 3000);
     }, 3000);
 }
