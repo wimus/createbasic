@@ -10,9 +10,12 @@
   "author": "Wim Smits",
   "license": "ISC",
   "dependencies": {
+    "archiver": "^0.21.0",
+    "cli-spinner": "^0.2.2",
     "colors": "^1.1.2",
     "express": "^4.13.4",
     "formidable": "^1.0.17",
-    "fs-extra": "^0.26.4"
+    "fs-extra": "^0.26.4",
+    "rimraf": "^2.5.1"
   }
 }
