@@ -228,7 +228,7 @@ function getData(res,fields, files){
 
         setTimeout(function(){
             //remove projectfolder, because we got a fancy zipfile now :)
-            rimraf('projects/' + fields.AIfolder, fs, function({console.log('[SUCCESS]'.green, ' Bestanden opgekuist.');}));
+            rimraf('projects/' + fields.AIfolder, fs, test);
             spinner.stop();
 
             console.log('[SUCCESS]'.random, ' Project setup OK.');
@@ -238,6 +238,8 @@ function getData(res,fields, files){
             });
         }, 3000);
     }, 3000);
+}
 
-
+function test(){
+    return '';
 }
