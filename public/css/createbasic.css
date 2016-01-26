@@ -5,3 +5,11 @@ h2 {
 h3 {
 	margin-top: 10px;
 }
+
+form {
+	margin-bottom: 100px;
+}
+
+button[type='submit'] {
+	width: 100%;
+}
